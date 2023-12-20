@@ -48,7 +48,7 @@ class Code_explainer():
 
 
 def main():
-    st.title('GPT code explainer')
+    st.title('GPT Code Explainer')
 
     code_languages = st_ace.LANGUAGES
     code_language = st.selectbox(
