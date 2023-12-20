@@ -51,7 +51,10 @@ def main():
     st.title('GPT code explainer')
 
     code_languages = st_ace.LANGUAGES
-    code_language = st.selectbox('language', code_languages)
+    code_language = st.selectbox(
+        'language',
+        code_languages,
+        index=code_languages.index('python'))
 
     code = st_ace.st_ace(
         placeholder='type your code here',
@@ -61,7 +64,7 @@ def main():
         return
 
     with open('api_key') as f:
-        code_explainer = Code_explainer(code_language, f.read())
+        code_explainer = Code_explainer(code_language, f.read().strip())
 
     code_explainer.submit_code(code)
 
