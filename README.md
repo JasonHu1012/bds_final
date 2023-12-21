@@ -9,5 +9,5 @@ pip install -r requirements.txt
 streamlit run code_explainer.py
 ```
 
-Make sure to put your openai api key in the `api_key` file.
-
+You can use fibonacci.py as a test code.    
+Make sure to put your openai api key in the `api_key` file. 
