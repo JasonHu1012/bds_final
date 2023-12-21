@@ -7,15 +7,18 @@ import json
 class Code_explainer():
     def __init__(self, code_language, openai_api_key):
         self.code_language = code_language
-        self.client = OpenAI(
-            api_key=openai_api_key
-        )
+        # TODO: remove comment
+        #self.client = OpenAI(
+        #    api_key=openai_api_key
+        #)
         self.code = ''
         self.overview = {
             'explanation': '',
             'improvement': ''}
 
     def submit_code(self, code):
+        # TODO: remove return
+        return
         prompt = f'''我將會給你一段{self.code_language}程式碼，請你解釋這段程式在做什麼，以及可以怎麼改善它。
 【以下為程式碼】
 {code}
@@ -41,9 +44,13 @@ class Code_explainer():
         self.overview['improvement'] = message['improvement']
 
     def get_explanation(self):
+        # TODO: remove mock
+        return 'This is mock reply ' + '這段程式碼是用來計算斐波那契數列的第 n 個數字，其中 n 由使用者輸入。程式初始化兩個變數 a 和 b 為 1，然後使用迴圈計算並更新這兩個變數，最終輸出斐波那契數列的第 n 個數字。'
         return self.overview['explanation']
 
     def get_improvement(self):
+        # TODO: remove mock
+        return 'This is mock reply ' + '程式碼整體看起來已經相當簡潔，但還是有一些改進的空間。首先，可以加入一些輸入驗證，確保使用者輸入的是正整數。另外，可以考慮將程式包裝成一個函式，以便更容易重複使用。最後，可以加上註釋來解釋程式的目的和運作方式，提高代碼的可讀性。'
         return self.overview['improvement']
 
 
