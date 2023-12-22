@@ -1,4 +1,4 @@
-# GPT Code Explainer
+# Code Chatbot
 
 This project aims to assist users to understand and improve their codes with aid of openai.
 
