@@ -7,7 +7,7 @@ import json
 TEST = False
 
 
-class Code_explainer():
+class Code_chatbot():
     def __init__(self, code_language, openai_api_key):
         self.code_language = code_language
         if not TEST:
@@ -61,7 +61,7 @@ class Code_explainer():
 
 
 def main():
-    st.title('GPT Code Explainer')
+    st.title('Code Chatbot')
 
     code_languages = st_ace.LANGUAGES
     code_language = st.selectbox(
@@ -77,14 +77,14 @@ def main():
         return
 
     with open('api_key') as f:
-        code_explainer = Code_explainer(code_language, f.read().strip())
-    code_explainer.submit_code(code)
+        code_chatbot = Code_chatbot(code_language, f.read().strip())
+    code_chatbot.submit_code(code)
 
     st.header('Code Explaination')
-    st.write(code_explainer.get_explanation())
+    st.write(code_chatbot.get_explanation())
 
     st.header('How to Improve')
-    st.write(code_explainer.get_improvement())
+    st.write(code_chatbot.get_improvement())
 
 if __name__ == '__main__':
     main()
