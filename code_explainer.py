@@ -4,13 +4,16 @@ from openai import OpenAI
 import json
 
 
+TEST = False
+
+
 class Code_explainer():
     def __init__(self, code_language, openai_api_key):
         self.code_language = code_language
-        
-        self.client = OpenAI(
-            api_key=openai_api_key
-        )
+        if not TEST:
+            self.client = OpenAI(
+                api_key=openai_api_key
+            )
         self.code = ''
         self.overview = {
             'explanation': '',
@@ -29,6 +32,9 @@ class Code_explainer():
 回傳格式：
 以json格式回傳，如{{"explanation":程式碼說明,"improvement":程式改進建議}}'''
 
+        if TEST:
+            return
+
         completion = self.client.chat.completions.create(
             model='gpt-3.5-turbo',
             messages=[
@@ -38,18 +44,19 @@ class Code_explainer():
         print(completion) 
         message = json.loads(completion.choices[0].message.content)  
         print(message)
+
         self.code = code
         self.overview['explanation'] = message['explanation']
         self.overview['improvement'] = message['improvement']
 
     def get_explanation(self):
-        # TODO: remove mock
-        # return 'This is mock reply ' + '這段程式碼是用來計算斐波那契數列的第 n 個數字，其中 n 由使用者輸入。程式初始化兩個變數 a 和 b 為 1，然後使用迴圈計算並更新這兩個變數，最終輸出斐波那契數列的第 n 個數字。'
+        if TEST:
+            return '這段程式碼是用來計算斐波那契數列的第 n 個數字，其中 n 由使用者輸入。程式初始化兩個變數 a 和 b 為 1，然後使用迴圈計算並更新這兩個變數，最終輸出斐波那契數列的第 n 個數字。'
         return self.overview['explanation']
 
     def get_improvement(self):
-        # TODO: remove mock
-        # return 'This is mock reply ' + '程式碼整體看起來已經相當簡潔，但還是有一些改進的空間。首先，可以加入一些輸入驗證，確保使用者輸入的是正整數。另外，可以考慮將程式包裝成一個函式，以便更容易重複使用。最後，可以加上註釋來解釋程式的目的和運作方式，提高代碼的可讀性。'
+        if TEST:
+            return '程式碼整體看起來已經相當簡潔，但還是有一些改進的空間。首先，可以加入一些輸入驗證，確保使用者輸入的是正整數。另外，可以考慮將程式包裝成一個函式，以便更容易重複使用。最後，可以加上註釋來解釋程式的目的和運作方式，提高代碼的可讀性。'
         return self.overview['improvement']
 
 
